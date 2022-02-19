@@ -7,7 +7,7 @@ import config from "./config";
       `mongodb+srv://${config.MONGO_USER}:${config.MONGO_PASSWORD}@${config.MONGO_HOST}/${config.MONGO_DATABASE}?retryWrites=true&w=majority`;
 
     const db = await mongoose.connect(uri);
-    console.log("db", db.connection);
+    // console.log("db", db.connection);
   }
   catch (error) {
     console.error(error);
