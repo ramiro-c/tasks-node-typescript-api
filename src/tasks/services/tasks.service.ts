@@ -3,7 +3,7 @@
  */
 import { BaseTask, Task } from "../interfaces/task.interface";
 import { Tasks } from "../interfaces/tasks.interface";
-const { nanoid } = require("nanoid");
+import { nanoid } from "nanoid";
 
 /**
  * In-Memory Store

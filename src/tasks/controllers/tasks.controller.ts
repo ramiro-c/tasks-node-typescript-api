@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
+import { Request, RequestHandler, Response } from "express";
 import * as TaskService from "../services/tasks.service";
 import { BaseTask, Task } from "../interfaces/task.interface";
 import { Tasks } from "../interfaces/tasks.interface";
 
-export const getTasks = async (req: Request, res: Response) => {
+export const getTasks: RequestHandler = async (req: Request, res: Response) => {
   try {
     const tasks: Tasks = await TaskService.findAll();
 
@@ -13,7 +13,7 @@ export const getTasks = async (req: Request, res: Response) => {
   }
 }
 
-export const getTask = async (req: Request, res: Response) => {
+export const getTask: RequestHandler = async (req: Request, res: Response) => {
   try {
     const task: Task | undefined = await TaskService.find(req.params.id);
 
@@ -27,7 +27,7 @@ export const getTask = async (req: Request, res: Response) => {
   }
 }
 
-export const createTask = async (req: Request, res: Response) => {
+export const createTask: RequestHandler = async (req: Request, res: Response) => {
   try {
     const task: BaseTask = req.body;
 
@@ -39,7 +39,7 @@ export const createTask = async (req: Request, res: Response) => {
   }
 };
 
-export const updateTask = async (req: Request, res: Response) => {
+export const updateTask: RequestHandler = async (req: Request, res: Response) => {
   try {
     const taskUpdate: Task = req.body;
 
@@ -58,7 +58,7 @@ export const updateTask = async (req: Request, res: Response) => {
   }
 }
 
-export const removeTask = async (req: Request, res: Response) => {
+export const removeTask: RequestHandler = async (req: Request, res: Response) => {
   try {
     const task: Task | null = await TaskService.remove(req.params.id);
 
