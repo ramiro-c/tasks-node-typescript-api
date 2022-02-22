@@ -1,72 +1,69 @@
 import { Request, RequestHandler, Response } from "express";
 import * as TaskService from "../services/tasks.service";
-import { BaseTask, Task } from "../interfaces/task.interface";
-import { Tasks } from "../interfaces/tasks.interface";
+import { IBaseTask, ITask } from "../interfaces/task.interface";
+import { ITasks } from "../interfaces/tasks.interface";
 
 export const getTasks: RequestHandler = async (req: Request, res: Response) => {
   try {
-    const tasks: Tasks = await TaskService.findAll();
+    const tasks: ITasks = await TaskService.findAll();
 
     res.status(200).json(tasks);
   } catch (e: any) {
-    res.status(500).send(e?.message);
+    res.status(500).json(e?.message);
   }
 }
 
 export const getTask: RequestHandler = async (req: Request, res: Response) => {
   try {
-    const task: Task | undefined = await TaskService.find(req.params.id);
+    const task: ITask | null = await TaskService.find(req.params.id);
 
     if (task) {
       return res.status(200).json(task);
     }
 
-    res.status(404).send("task not found");
+    res.status(404).json("task not found");
   } catch (e: any) {
-    res.status(500).send(e?.message);
+    res.status(500).json(e?.message);
   }
 }
 
 export const createTask: RequestHandler = async (req: Request, res: Response) => {
   try {
-    const task: BaseTask = req.body;
+    const task: IBaseTask = req.body;
 
-    const newTask: Task = await TaskService.create(task);
+    const newTask: ITask = await TaskService.create(task);
 
     res.status(201).json(newTask);
   } catch (e: any) {
-    res.status(500).send(e?.message);
+    res.status(500).json(e?.message);
   }
 };
 
 export const updateTask: RequestHandler = async (req: Request, res: Response) => {
   try {
-    const taskUpdate: Task = req.body;
+    const taskUpdate: ITask = req.body;
+    const updatedTask: ITask | null = await TaskService.update(req.params.id, taskUpdate);
 
-    const existingTask: Task | undefined = await TaskService.find(req.params.id);
-
-    if (existingTask) {
-      const updatedTask = await TaskService.update(req.params.id, taskUpdate);
+    if (updatedTask) {
       return res.status(200).json(updatedTask);
     }
 
-    const newTask = await TaskService.create(taskUpdate);
-
-    res.status(201).json(newTask);
+    res.status(404).json("task not found");
   } catch (e: any) {
-    res.status(500).send(e?.message);
+    res.status(500).json(e?.message);
   }
 }
 
 export const removeTask: RequestHandler = async (req: Request, res: Response) => {
   try {
-    const task: Task | null = await TaskService.remove(req.params.id);
+    const task: ITask | null = await TaskService.remove(req.params.id);
 
     if (task) {
       return res.status(200).json(task);
     }
-    res.sendStatus(204);
+
+    res.status(404).json("task not found");
   } catch (e: any) {
-    res.status(500).send(e?.message);
+    res.status(500).json(e?.message);
   }
 }
