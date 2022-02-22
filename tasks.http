@@ -1,0 +1,32 @@
+### REST Client extension
+
+@api = http://localhost:3001/api/v1
+@id = 6213c32419866fdca51f7322
+
+###
+GET {{api}}/tasks 
+
+###
+GET {{api}}/tasks/{{id}}
+
+###
+POST {{api}}/tasks 
+Content-Type: application/json
+
+{
+  "title": "New Task HTTP title",
+  "description": "New Task HTTP description",
+  "done": false
+}
+
+###
+PUT {{api}}/tasks/{{id}}
+Content-Type: application/json
+
+{
+  "title": "Updated Task HTTP title",
+  "description": "Updated Task HTTP description",
+  "done": true
+}
+###
+DELETE  {{api}}/tasks/{{id}}
