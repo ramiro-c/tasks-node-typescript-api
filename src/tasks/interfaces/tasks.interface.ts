@@ -1,3 +1,3 @@
-import { Task } from "./task.interface";
+import { ITask } from "./task.interface";
 
-export interface Tasks extends Array<Task> { }
+export interface ITasks extends Array<ITask> { }

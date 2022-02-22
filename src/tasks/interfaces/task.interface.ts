@@ -1,9 +1,9 @@
-export interface BaseTask {
+export interface IBaseTask {
   title: string;
   description: string;
   done: boolean;
 }
 
-export interface Task extends BaseTask {
-  id: string;
+export interface ITask extends IBaseTask {
+  _id: string;
 }

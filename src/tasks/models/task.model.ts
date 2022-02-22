@@ -1,5 +1,5 @@
 import { Schema, model, Model, Document } from "mongoose";
-import { BaseTask } from "../interfaces/task.interface";
+import { IBaseTask } from "../interfaces/task.interface";
 
 interface TaskDocument extends Document {
   title: string;
@@ -8,7 +8,7 @@ interface TaskDocument extends Document {
 }
 
 interface TaskModel extends Model<TaskDocument> {
-  build(attr: BaseTask): TaskDocument
+  build(attr: IBaseTask): TaskDocument
 }
 
 const taskSchema = new Schema({
@@ -32,7 +32,7 @@ const taskSchema = new Schema({
   timestamps: false
 });
 
-taskSchema.statics.build = (attr: BaseTask) => {
+taskSchema.statics.build = (attr: IBaseTask) => {
   return new Task(attr);
 }
 
