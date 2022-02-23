@@ -8,5 +8,5 @@ export default {
   MONGO_PASSWORD: encodeURIComponent(process.env.MONGO_PASSWORD || ""),
   MONGO_HOST: process.env.MONGO_HOST || "",
   PORT: parseInt(process.env.PORT as string, 10),
-  BASE_URL: "/api/v1"
+  BASE_URL: "/api/v2"
 }
